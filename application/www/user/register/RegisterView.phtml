@@ -1,0 +1,92 @@
+<!-- Affichage du template lié à la vue -->
+<div class="container">
+    <h2>
+        <?php //var_dump($error) ?>
+        <i class="fa fa-user" aria-hidden="true"></i> Création d'un compte client </h2>
+
+    <form action="" method="post" class="generic-form">
+    <aside class="error-message hidden" <?php echo (isset($error))? 'style="display: block;"': '' ?>>
+		<h3><i class="fa fa-warning"></i> Il y a <span id="total-error-count"><?php echo empty($count_error)? '1':$count_error?></span> erreur(s) dans le formulaire !</h3>
+		<p>
+	        <?php if (isset($error)) {
+                echo $error;
+            }?>
+        </p></aside>
+        <fieldset>
+            <legend>
+                <i class="fa fa-book" aria-hidden="true"></i> Identité et coordonnées
+            </legend>
+            <ul>
+                <li>
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom" name="nom" value="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                </li>
+                <li>
+                    <label for="prenom">Prenom :</label>
+                    <input type="text" id="prenom" name="prenom" value="">
+                </li>
+                <li>
+                    <label for="adresse">Adresse :</label>
+                    <textarea name="adresse" id="adresse" cols="30" rows="5"></textarea>
+                </li>
+                <li>
+                    <label for="born_date">Date de naissance :</label>
+                    <select name="day" id="day">
+                        <?php for($i = 1; $i <= 31 ; $i++ ) :?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endfor; ?>
+                    </select> /
+                    <select name="month" id="month">
+                        <option value="1">Janvier</option>
+                        <option value="2">Février</option>
+                        <option value="3">Mars</option>
+                        <option value="4">Avril</option>
+                        <option value="5">Mai</option>
+                        <option value="6">Juin</option>
+                        <option value="7">Juillet</option>
+                        <option value="8">Août</option>
+                        <option value="9">Septembre</option>
+                        <option value="10">Octobre</option>
+                        <option value="11">Novembre</option>
+                        <option value="12">Décembre</option>
+                    </select> /
+                    <select name="year" id="year">
+                        <?php for($i = Date('Y'); $i >= 1900; $i-- ) :?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </li>
+                <li>
+                    <label for="ville">Ville :</label>
+                    <input type="text" id="ville" name="ville" value="">
+                </li>
+                <li>
+                    <label for="code_postal">Code Postal :</label>
+                    <input type="text" id="code_postal" name="code_postal" value="">
+                </li>
+                <li>
+                    <label for="phone">Teléphone :</label>
+                    <input type="text" id="phone" name="phone" value="">
+                </li>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend>
+                <i class="fa fa-lock" aria-hidden="true"></i> Informations d'autentification
+            </legend>
+            <ul>
+                <li>
+                    <label for="mail">E-mail :</label>
+                    <input type="text" id="mail" name="mail">
+                </li>
+                <li>
+                    <label for="mdp">Mot de passe :</label>
+                    <input type="password" id="mdp" name="mdp" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                </li>
+            </ul>
+        </fieldset>
+        <button class="button button-primary" id="js_creat" type="submit">Creer le compte</button>
+        <button class="button button-cancel small" type="submit">Annuler</button>
+    </form>
+</div>
+<script src="<?= $wwwUrl ?>/js/classes/ValidationForm.js"></script>

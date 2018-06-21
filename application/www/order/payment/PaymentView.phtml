@@ -1,0 +1,80 @@
+<div class="container">
+    <?php if(empty($resulta)): ?>
+    <table class="generic-table">    <tbody>        <tr>            <td class="basket-empty">Votre panier est vide pour le moment !</td>        </tr>    </tbody></table>
+    <?php else: ?>
+    <h2>
+        <i class="fa fa-check"></i> Payer la commande</h2>
+
+    <section class="invoice">
+        <p>
+            <strong> <?= $resulta[0]['firstname'].' ' .$resulta[0]['lastname'] ?> </strong>
+        </p>
+        <p> <?= $resulta[0]['address'] ?> </p>
+        <p> <?= $resulta[0]['zipcode'] ?>
+            <span class="city"> <?= $resulta[0]['city'] ?> </span>
+        </p>
+    </section>
+
+    <table class="generic-table meal-list">
+        <caption>Récapitulatif de la commande</caption>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th class="number">Quantité</th>
+                <th class="number">Prix Unitaire</th>
+                <th class="number">Prix Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach ($resulta as $value): ?>
+            <?php $total += $value['price_sale'] * $value['prodID'] ?>
+            <tr>
+                <td>
+                    <img src="<?= $wwwUrl.'/images/meals/'. $value["photo"]?>" width="25%">
+                    <em><?= $value['name'] ?></em>
+                </td>
+                <td class="number"> <?= $value['prodID'] ?> </td>
+                <td class="number"> <?= $value['price_sale'] ?> €</td>
+                <td class="number"><?= $value['price_sale'] * $value['prodID'] ?> €</td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Total HT</td>
+                <td><?= $total ?> €</td>
+            </tr>
+            <tr>
+                <td colspan="3">TVA (20 %)</td>
+                <td><?= $total * 0.2?> €</td>
+            </tr>
+            <tr>
+                <td class="colorful" colspan="3">Total TTC</td>
+                <td class="colorful"><?= $total * 1.2?> €</td>
+            </tr>
+            <tr class="small-notice">
+                <td colspan="4">Commandé le <?= $date['date_order'] ?> </td>
+            </tr>
+            <?php if ($date['date_payment'] != null): ?>
+                <tr class="small-notice">
+                    <td colspan="4">Payé le <?= $date['date_payment'] ?> </td>
+                </tr>
+            <?php endif; ?>
+        </tfoot>
+    </table>
+
+    <hr>
+    <h3>Merci de bien vouloir procéder au paiement de la commande.</h3>
+    <form id="payment-form" class="generic-form" action="<?= $requestUrl ?>/order/succes" method="POST">
+        <ul>
+            <li>
+                <button id="pay" class="button button-primary" <?= empty($resulta) ? 'disabled' :'' ?>>Payer</button>
+                <a class="button button-cancel small" href="<?= $requestUrl ?> ">Annuler</a>
+            </li>
+        </ul>
+    </form>
+<?php endif; ?>
+</div>
+<script src="<?= $wwwUrl ?>/js/classes/Payment.js"></script>
+

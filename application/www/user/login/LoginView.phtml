@@ -1,0 +1,34 @@
+<!-- Affichage du template lié à la vue -->
+<h2>
+    <i class="fa fa-lock"></i> 11Se connecter avec un compte utilisateur</h2>
+
+<form class="generic-form" action="login" method="POST">
+
+    <aside class="error-message hidden" <?php echo isset($errorConection)? 'style="display: block"': '' ?>>
+        <h3>
+            <i class="fa fa-warning"></i> Il y a
+            <em class="total-error-count">1</em> erreur(s) dans le formulaire !</h3>
+        <p><?php echo isset($errorConection)? $errorConection: '' ?></p>
+    </aside>
+
+    <fieldset>
+        <legend>Informations d'authentification</legend>
+        <ul>
+            <li>
+                <label for="email">E-mail :</label>
+                <input id="email" name="email" data-required="" data-name="E-mail" value="" type="text">
+            </li>
+            <li>
+                <label for="password">Mot de passe :</label>
+                <input id="password" name="password" data-required="" data-name="Mot de passe" type="password">
+            </li>
+        </ul>
+    </fieldset>
+
+    <ul>
+        <li>
+            <input class="button button-primary" value="Connexion" type="submit">
+            <a class="button button-cancel small" href="/restaurant/index.php">Annuler</a>
+        </li>
+    </ul>
+</form>

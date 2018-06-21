@@ -1,0 +1,35 @@
+<!-- Message de notification -->
+
+<!-- Code HTML à écrire -->
+
+<!-- <aside id="notice" class="notice"< ?php echo  style="display: block;">
+        <p>Votre réservation est bien enregistrée, nous vous en remercions.</p>
+</aside> -->
+
+<!-- Liste des aliments -->
+<table class="generic-table meal-list">
+    <caption>Carte du restaurant</caption>
+    <tbody>
+        <?php foreach ($products as $value):?>
+        <tr>
+            <td>
+                <img src="<?= $wwwUrl.'/images/meals/'. $value["photo"]?>" alt="photo">
+            </td>
+            <td>
+                <p>
+                    <strong>
+                        <?= $value["name"] ?>
+                    </strong>
+                </p>
+                <p>
+                    <?= $value["description"] ?>
+                </p>
+            </td>
+            <td class="number"><strong><?= $value["price_sale"] ?></strong> €
+                
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+
+</table>
